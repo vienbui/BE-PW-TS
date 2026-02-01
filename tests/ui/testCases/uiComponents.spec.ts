@@ -23,7 +23,8 @@ test.describe('Text Box', () => {
 
     // Assertions
     await expect(textBoxPage.outputBox).toBeVisible();
-    await expect(textBoxPage.outputName).toContainText(user.name);
+    // await expect(textBoxPage.outputName).toContainText(user.name);
+    await expect(textBoxPage.outputName).toContainText('Wrong Name');
     await expect(textBoxPage.outputEmail).toContainText(user.email);
     await expect(textBoxPage.outputCurrentAddress).toContainText(user.currentAddress);
     })
