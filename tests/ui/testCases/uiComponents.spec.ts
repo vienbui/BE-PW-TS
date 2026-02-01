@@ -25,5 +25,6 @@ test.describe('Text Box', () => {
     await expect(textBoxPage.outputBox).toBeVisible();
     await expect(textBoxPage.outputName).toContainText(user.name);
     await expect(textBoxPage.outputEmail).toContainText(user.email);
+    await expect(textBoxPage.outputCurrentAddress).toContainText(user.currentAddress);
     })
 })

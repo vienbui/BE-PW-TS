@@ -11,8 +11,9 @@ export class TextBoxPage {
   readonly permanentAddressInput: Locator;
   readonly submitButton: Locator;
   readonly outputBox: Locator;
-    readonly outputName: Locator;
-    readonly outputEmail: Locator;
+  readonly outputName: Locator;
+  readonly outputEmail: Locator;
+  readonly outputCurrentAddress: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +25,7 @@ export class TextBoxPage {
     this.outputBox = page.locator('#output');
     this.outputName = page.locator('#name');
     this.outputEmail = page.locator('#email');
+    this.outputCurrentAddress = page.locator('p#currentAddress');
   }
 
   // Actions
