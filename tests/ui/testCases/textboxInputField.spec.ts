@@ -13,7 +13,7 @@ test.describe('Text Box', () => {
 
     test('Fill out the form', async () => {
        const user = userData.validUser;
-       await textBoxPage.fillForm(
+       await textBoxPage.fillTextBox(
         user.name,
         user.email,
         user.currentAddress,

@@ -1,9 +1,7 @@
 import { Page, Locator } from '@playwright/test';
+import { MainPage } from './mainPage';
 
-export class TextBoxPage {
-  // Page instance
-  readonly page: Page;
-  
+export class TextBoxPage extends MainPage {
   // Locators
   readonly fullNameInput: Locator;
   readonly emailInput: Locator;
@@ -16,7 +14,7 @@ export class TextBoxPage {
   readonly outputCurrentAddress: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.fullNameInput = page.getByPlaceholder('Full Name');
     this.emailInput = page.getByPlaceholder('name@example.com');
     this.currentAddressInput = page.locator('#currentAddress');
@@ -33,7 +31,7 @@ export class TextBoxPage {
     await this.page.goto('https://demoqa.com/text-box');
   }
 
-  async fillForm(name: string, email: string, currentAddr: string, permanentAddr: string) {
+  async fillTextBox(name: string, email: string, currentAddr: string, permanentAddr: string) {
     await this.fullNameInput.fill(name);
     await this.emailInput.fill(email);
     await this.currentAddressInput.fill(currentAddr);
