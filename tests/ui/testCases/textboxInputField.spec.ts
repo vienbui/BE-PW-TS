@@ -13,7 +13,7 @@ test.describe('Text Box', () => {
 
     test('Fill out the form', async () => {
        const user = userData.validUser;
-       await textBoxPage.fillForm(
+       await textBoxPage.fillTextBox(
         user.name,
         user.email,
         user.currentAddress,
@@ -23,8 +23,7 @@ test.describe('Text Box', () => {
 
     // Assertions
     await expect(textBoxPage.outputBox).toBeVisible();
-    // await expect(textBoxPage.outputName).toContainText(user.name);
-    await expect(textBoxPage.outputName).toContainText('Wrong Name');
+    await expect(textBoxPage.outputName).toContainText(user.name);
     await expect(textBoxPage.outputEmail).toContainText(user.email);
     await expect(textBoxPage.outputCurrentAddress).toContainText(user.currentAddress);
     })
