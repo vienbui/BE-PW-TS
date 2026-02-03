@@ -1,0 +1,30 @@
+name: Slack Notification on PR Merge
+
+on:
+  pull_request:
+    types: [merged]
+
+jobs:
+  notify:
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "PR Merged! :rocket:",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*PR Merged* :white_check_mark:\n*Title:* ${{ github.event.pull_request.title }}\n*Author:* ${{ github.event.pull_request.user.login }}\n*Repo:* ${{ github.repository }}\n*Link:* ${{ github.event.pull_request.html_url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
