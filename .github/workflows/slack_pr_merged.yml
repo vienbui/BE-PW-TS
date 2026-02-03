@@ -2,7 +2,7 @@ name: Slack Notification on PR Merge
 
 on:
   pull_request:
-    types: [merged]
+    types: [closed]
 
 jobs:
   notify:
