@@ -49,5 +49,13 @@ test.describe('Products API', () => {
         expect(allProductsContainSearchTerm).toBe(true);
     })
 
+    //API 6: POST to search product without search term and get response code 400
+    test("POST to search product without search term and get response code 400", async ({request}) => {
+        const response = await request.post(API_URLS.searchProduct);
+        expect(response.status()).toBe(200)
+        const responseBody = await response.json();
+        expect(responseBody.responseCode).toBe(400)
+        expect(responseBody.message).toContain("Bad request, search_product parameter is missing in POST request")
+    })
 })
 
