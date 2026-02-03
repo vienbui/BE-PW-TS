@@ -1,4 +1,9 @@
-# name: Playwright Tests
+# name: Playwright Tests (Disabled)
+
+# on:
+#   workflow_dispatch:  # Manual trigger only - won't run automatically
+
+# Original triggers (commented out):
 # on:
 #   push:
 #     branches: [ '**' ]
@@ -28,3 +33,10 @@
 #         name: playwright-report
 #         path: tests/playwright-report/
 #         retention-days: 30
+
+jobs:
+  placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Workflow disabled - trigger manually if needed"
