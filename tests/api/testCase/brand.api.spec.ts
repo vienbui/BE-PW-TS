@@ -13,4 +13,13 @@ test.describe('Brand API',  () => {
         expect (responseBody.brands[0].brand).toBeDefined();
         expect (responseBody.brands[0].id).toBeDefined();
     })
+
+    // API4: post to all brands list and get error 405
+    test("Post to all brands list and get error 405", async ({request}) => {
+        const response = await request.post(API_URLS.brandList);
+        expect (response.status()).toBe(200)
+        const responseBody = await response.json();
+        expect (responseBody.responseCode).toBe(405)
+        expect (responseBody.message).toBe("This request method is not supported.");
+    })
 })

@@ -27,5 +27,35 @@ test.describe('Products API', () => {
         expect (responseBody.responseCode).toBe(405)
         expect (responseBody.message).toBe('This request method is not supported.')
     })
+
+    //API 5: POST to search product and get response code 200
+    test("POST to search product and get response code 200", async ({request}) => {
+        const searchTerm = "jean";
+        const response = await request.post(API_URLS.searchProduct, {
+            form: {
+                search_product: searchTerm
+            }
+        });
+        expect(response.status()).toBe(200)
+        const responseBody = await response.json();
+        expect(responseBody.responseCode).toBe(200);
+        expect(responseBody.products).toBeDefined();
+        expect(responseBody.products.length).toBeGreaterThan(0);
+        
+        // Verify all products contain the search term
+        const allProductsContainSearchTerm = responseBody.products.every(
+            (product: { name: string }) => product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        expect(allProductsContainSearchTerm).toBe(true);
+    })
+
+    //API 6: POST to search product without search term and get response code 400
+    test("POST to search product without search term and get response code 400", async ({request}) => {
+        const response = await request.post(API_URLS.searchProduct);
+        expect(response.status()).toBe(200)
+        const responseBody = await response.json();
+        expect(responseBody.responseCode).toBe(400)
+        expect(responseBody.message).toContain("Bad request, search_product parameter is missing in POST request")
+    })
 })
 
